@@ -6,10 +6,6 @@ import { Server } from 'socket.io';
 const app =express();
 
 
-
-
-
-
 // Setup server
 const server = http.createServer(app);
 const io = new Server(server, {

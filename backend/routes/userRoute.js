@@ -6,6 +6,7 @@ import multer from 'multer';
 import path from 'path';
 import {
   loginUser,
+  publicRegister,
   getProfile,
   updateProfile,
   changePassword,
@@ -27,8 +28,9 @@ import { assignClassToTeacher, registerTeacher,getStudentsByClassAndSubject } fr
 
 const router = express.Router();
 
-// Public Login Route
+// Public Routes
 router.post('/login', loginUser);
+router.post('/signup', publicRegister);
 router.delete('/logout',logout);
 
 // Protected Routes

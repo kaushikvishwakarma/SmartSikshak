@@ -31,6 +31,8 @@ import SubjectAttendance from './components/SubjectAttendance.jsx'
 import AssignmentAssessment from './components/AssignmentAssessment.jsx'
 import StudentAssignmentAssessment from './components/StudentAssignmentAssessment.jsx'
 // import TeacherAssignment from './components/TeacherAssignment.jsx'
+import Register from './components/Register.jsx'
+
 const browserRouter = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +48,10 @@ const browserRouter = createBrowserRouter([
   {
     path: "/register",
     element: <Signup />,
+  },
+  {
+    path: "/signup",
+    element: <Register />,
   },
  
   {

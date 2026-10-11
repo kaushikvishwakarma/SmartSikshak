@@ -113,6 +113,44 @@ export const changePassword = async (req, res) => {
 };
 
 // Mentor Creates Users (teacher/student)
+export const publicRegister = async (req, res) => {
+  try {
+    const { name, email, usertype, password } = req.body;
+
+    if (!name || !email || !usertype || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const allowedRoles = ['student', 'teacher', 'mentor'];
+    if (!allowedRoles.includes(usertype)) {
+      return res.status(400).json({ message: 'Invalid usertype' });
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(409).json({ message: 'Email already in use' });
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const user = new User({
+      name,
+      email,
+      usertype,
+      password: hashedPassword,
+    });
+
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      message: 'Account created successfully',
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Registration failed' });
+  }
+};
+
+// Mentor Creates Users (teacher/student)
 export const registerUserByMentor = async (req, res) => {
   try {
     const { name, email, phone, usertype, password,classId } = req.body;
